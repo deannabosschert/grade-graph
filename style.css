@@ -15,4 +15,12 @@
     position: fixed;
     bottom: 0;
     height: fit-content;
+    width: auto;
+    font-style: italic;
+    color: rgba(246, 246, 246, 0.9);
+}
+
+.tooltip span, .tooltip b {
+    font-style: normal;
+    color: white;
 }

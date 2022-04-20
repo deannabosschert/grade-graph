@@ -14,13 +14,19 @@
         .append("g")
         .attr("transform", "translate(" + margin + "," + margin + ")")
 
+    function toNumber(string) {
+        return parseFloat(string.replace(',', '.'))
+    }
+
     d3.csv(gistUrl, // read the data
         (d) => ({ // format the data
-            date: d3.timeParse("%Y-%m-%d")(d.datum), // parse the date
-            grade: parseFloat(d.cijfer.replace(',', '.')), // parse the number 
-            gradeSize: parseFloat(d.cijfergrootte.replace(',', '.')),
             course: d.vak,
-            project: d.project
+            project: d.project,
+            date: d3.timeParse("%Y-%m-%d")(d.datum), // parse the date
+            studypoints: parseFloat(d.studiepunten), // parse the number
+            grade: toNumber(d.cijfer), // parse the number 
+            gradeDecimal: toNumber(d.cijfer).toFixed(1), // parse the number and round it to 1 decimal
+            gradeSize: toNumber(d.cijfergrootte) // sum of the grade x studypoints
         }),
         (data) => {
             // X-AXIS
@@ -40,7 +46,7 @@
 
             // Z-AXIS 
             const z = d3.scaleLinear() // scale for the bubble size
-                .domain([0, 400])
+                .domain([0, 35])
                 .range([4, 40])
             const bubbleColor = d3.scaleOrdinal() // scale for the bubble color
                 .domain(["afstuderen", "project tech", "project web", "project beyond", "minor webdevelopment", "slc", "information design", "stage"])
@@ -77,8 +83,6 @@
                 .style("background-color", "#202020")
                 .style("border-radius", "5px")
                 .style("padding", "10px")
-                .style("color", "white")
-
 
             const showTooltip = function (d) {
                 tooltip
@@ -86,7 +90,7 @@
                     .duration(200) // tooltip transition duration
                 tooltip
                     .style("opacity", 1)
-                    .html("Course: " + d.course + ", graded with a: " + d.grade)
+                    .html("Course: <span>" + d.course + "</span>, graded with a <b>" + d.gradeDecimal + "</b> and worth <b>" + d.studypoints + "</b> study points")
                     .style("left", (d3.mouse(this)[0] + 30) + "px") // position the tooltip
                     .style("top", (d3.mouse(this)[1] + 30) + "px") // position the tooltip
             }
@@ -112,7 +116,7 @@
                 .attr("class", "gradeBubble") // give each dot a class called "gradeBubble"
                 .attr("cx", (d) => x(d.date)) // x position of the circle
                 .attr("cy", (d) => y(d.grade)) // y position of the circle
-                .attr("r", (d) => z(d.gradeSize)) // radius of the circle
+                .attr("r", (d) => z(d.studypoints)) // radius of the circle
                 .style("fill", (d) => bubbleColor(d.project))
                 .style("opacity", 0.75) // little transparency in case of bubbles overlap
                 .on("mouseover", showTooltip) // trigger the function on mousemove
