@@ -1,0 +1,18 @@
+* {
+    font-family: sans-serif;
+}
+
+.gradeBubble {
+    stroke-width: 2px;
+    stroke: white
+}
+
+.gradeBubble:hover {
+    stroke: black
+}
+
+.tooltip {
+    position: fixed;
+    bottom: 0;
+    height: fit-content;
+}
