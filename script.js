@@ -61,7 +61,7 @@
                 .attr("font-size", 14)
                 .attr("text-height", 14)
                 .attr("fill", "black")
-                .text("date")
+                .text("timeline (date by months/years)")
 
             // Y-AXIS LABEL
             const yLabel = svg.append("g")
