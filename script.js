@@ -92,13 +92,13 @@
                     .style("opacity", 1)
                     .html("Course: <span>" + d.course + "</span>, graded with a <b>" + d.gradeDecimal + "</b> and worth <b>" + d.studypoints + "</b> study points")
                     .style("left", (d3.mouse(this)[0] + 30) + "px") // position the tooltip
-                    .style("top", (d3.mouse(this)[1] + 30) + "px") // position the tooltip
+                    .style("top", (d3.mouse(this)[1] + 80) + "px") // position the tooltip
             }
 
             const moveTooltip = function (d) {
                 tooltip
                     .style("left", (d3.mouse(this)[0] + 30) + "px") // move the tooltip
-                    .style("top", (d3.mouse(this)[1] + 30) + "px")
+                    .style("top", (d3.mouse(this)[1] + 80) + "px")
             }
 
             const hideTooltip = (d) => {

@@ -2,22 +2,32 @@
     font-family: sans-serif;
 }
 
+#grade_graph {
+    overflow: scroll;
+    position: relative;
+}
+
 .gradeBubble {
     stroke-width: 2px;
-    stroke: white
+    stroke: white;
 }
 
 .gradeBubble:hover {
-    stroke: black
+    stroke: black;
+    cursor: pointer;
+}
+
+.gradeLabel {
+    user-select: none;
 }
 
 .tooltip {
-    position: fixed;
-    bottom: 0;
+    position: absolute;
     height: fit-content;
     width: auto;
     font-style: italic;
     color: rgba(246, 246, 246, 0.9);
+    user-select: none;
 }
 
 .tooltip span, .tooltip b {
