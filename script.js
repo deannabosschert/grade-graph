@@ -85,12 +85,20 @@
                 .style("padding", "10px")
 
             const showTooltip = function (d) {
+                let studypoints
+                
+                if (d.studypoints == 1) {
+                    studypoints = d.studypoints + "</b> study point"
+                } else {
+                    studypoints = d.studypoints + "</b> study points"
+                }
+
                 tooltip
                     .transition() // fade in tooltip
                     .duration(200) // tooltip transition duration
                 tooltip
                     .style("opacity", 1)
-                    .html("Course: <span>" + d.course + "</span>, graded with a <b>" + d.gradeDecimal + "</b> and worth <b>" + d.studypoints + "</b> study points")
+                    .html("Course: <span>" + d.course + "</span>, graded with a <b>" + d.gradeDecimal + "</b> and worth <b>" + studypoints)
                     .style("left", (d3.mouse(this)[0] + 30) + "px") // position the tooltip
                     .style("top", (d3.mouse(this)[1] + 80) + "px") // position the tooltip
             }
